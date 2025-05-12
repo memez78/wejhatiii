@@ -1,0 +1,54 @@
+{
+  "name": "Wejhati - Travel Planner",
+  "short_name": "Wejhati",
+  "description": "Find your perfect travel destination with personalized recommendations based on your preferences",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#6366f1",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "./icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/icon-192x192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "New Trip",
+      "short_name": "New Trip",
+      "description": "Create a new personalized trip",
+      "url": "./#tripFormPage",
+      "icons": [
+        {
+          "src": "./icons/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "View Trips",
+      "short_name": "Trips",
+      "description": "View your saved trips",
+      "url": "./#tripsPage",
+      "icons": [
+        {
+          "src": "./icons/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "categories": ["travel", "lifestyle"],
+  "dir": "ltr",
+  "lang": "en-US",
+  "prefer_related_applications": false
+}

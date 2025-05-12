@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wejhati - Travel Planner</title>
+    <meta name="description" content="Find your perfect travel destination with personalized recommendations based on your preferences">
+    <meta name="theme-color" content="#6366f1">
+    
+    <!-- PWA icons and manifest -->
+    <link rel="icon" href="./favicon.ico">
+    <link rel="apple-touch-icon" href="./icons/icon-192x192.png">
+    <link rel="manifest" href="./manifest.json">
+    
+    <!-- Lucide icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Welcome Screen (shows first) -->
+    <section id="welcomeScreen" class="screen active fade-in">
+        <div class="welcome-container">
+            <div class="logo-container">
+                <i data-lucide="map" class="logo-icon"></i>
+                <h1>Wejhati</h1>
+                <p>Your Personal Travel Planner</p>
+            </div>
+            
+            <div id="whyUsSection" class="why-us-section">
+                <h2>Why Choose Wejhati?</h2>
+                
+                <div class="features-container">
+                    <div class="feature-card">
+                        <i data-lucide="sparkles" class="feature-icon"></i>
+                        <h3>Personalized Recommendations</h3>
+                        <p>Get destinations tailored to your preferences and budget</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <i data-lucide="gift" class="feature-icon"></i>
+                        <h3>Surprise Me Feature</h3>
+                        <p>Add excitement with our countdown reveal</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <i data-lucide="wifi-off" class="feature-icon"></i>
+                        <h3>Works Offline</h3>
+                        <p>Plan your adventures even without internet</p>
+                    </div>
+                </div>
+                
+                <button id="joinUsBtn" class="btn btn-primary">
+                    <i data-lucide="user-plus" class="btn-icon"></i>
+                    Join Us
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Auth Screen -->
+    <section id="authScreen" class="screen">
+        <div class="auth-container">
+            <div class="auth-header">
+                <i data-lucide="map" class="logo-icon"></i>
+                <h1>Wejhati</h1>
+            </div>
+            
+            <!-- Login Form -->
+            <div id="loginForm" class="auth-form-container">
+                <h2>Welcome Back</h2>
+                <form id="loginFormElement">
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" placeholder="your@email.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" placeholder="••••••••" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+                <p class="auth-switch">Don't have an account? <a href="#" id="showSignupLink">Sign up</a></p>
+            </div>
+            
+            <!-- Signup Form -->
+            <div id="signupForm" class="auth-form-container" style="display: none;">
+                <h2>Create Account</h2>
+                <form id="signupFormElement">
+                    <div class="form-group">
+                        <label for="signupName">Full Name</label>
+                        <input type="text" id="signupName" placeholder="John Doe" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signupEmail">Email</label>
+                        <input type="email" id="signupEmail" placeholder="your@email.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" placeholder="••••••••" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Sign Up</button>
+                </form>
+                <p class="auth-switch">Already have an account? <a href="#" id="showLoginLink">Login</a></p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- App Shell (contains navbar and main content) -->
+    <section id="appShell" class="screen">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="navbar-logo">
+                <i data-lucide="map" class="nav-logo-icon"></i>
+                <span>Wejhati</span>
+            </div>
+            
+            <div class="navbar-menu">
+                <a href="#" class="nav-item active" data-page="home">
+                    <i data-lucide="home" class="nav-icon"></i>
+                    <span>Home</span>
+                </a>
+                <a href="#" class="nav-item" data-page="trips">
+                    <i data-lucide="briefcase" class="nav-icon"></i>
+                    <span>Trips</span>
+                </a>
+                <a href="#" class="nav-item" data-page="profile">
+                    <i data-lucide="user" class="nav-icon"></i>
+                    <span>Profile</span>
+                </a>
+            </div>
+        </nav>
+        
+        <!-- Content Area -->
+        <main class="content-area">
+            <!-- Home Page -->
+            <div id="homePage" class="page active">
+                <div class="page-header">
+                    <h1>Welcome, <span id="userNameDisplay">User</span>!</h1>
+                </div>
+                
+                <div class="hero-card">
+                    <div class="hero-image"></div>
+                    <div class="hero-content">
+                        <h2>Discover Your Next Adventure</h2>
+                        <p>Find personalized destinations based on your preferences and budget.</p>
+                        <button id="findTripBtn" class="btn btn-primary">
+                            <i data-lucide="search" class="btn-icon"></i>
+                            Find Your Perfect Trip
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-icon-container">
+                            <i data-lucide="map-pin" class="stat-icon"></i>
+                        </div>
+                        <h3>100+</h3>
+                        <p>Destinations</p>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon-container">
+                            <i data-lucide="tag" class="stat-icon"></i>
+                        </div>
+                        <h3>Budget</h3>
+                        <p>Friendly Options</p>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon-container">
+                            <i data-lucide="heart" class="stat-icon"></i>
+                        </div>
+                        <h3>Curated</h3>
+                        <p>Experiences</p>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon-container">
+                            <i data-lucide="wifi-off" class="stat-icon"></i>
+                        </div>
+                        <h3>Offline</h3>
+                        <p>Access</p>
+                    </div>
+                </div>
+                
+                <h2 class="section-title">Popular Destinations</h2>
+                <div id="popularDestinations" class="destinations-grid">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Trips Page -->
+            <div id="tripsPage" class="page">
+                <div class="page-header">
+                    <h1>Your Trips</h1>
+                    <button id="newTripBtn" class="btn btn-primary">
+                        <i data-lucide="plus" class="btn-icon"></i>
+                        New Trip
+                    </button>
+                </div>
+                
+                <div id="noTripsMessage" class="empty-state">
+                    <div class="empty-icon-container">
+                        <i data-lucide="briefcase" class="empty-icon"></i>
+                    </div>
+                    <h2>No trips yet!</h2>
+                    <p>Create your first trip to get personalized destination recommendations.</p>
+                    <button id="createFirstTripBtn" class="btn btn-primary">
+                        <i data-lucide="plus" class="btn-icon"></i>
+                        Create Your First Trip
+                    </button>
+                </div>
+                
+                <div id="tripsList" class="trips-grid">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Trip Form Page -->
+            <div id="tripFormPage" class="page">
+                <div class="page-header">
+                    <button class="back-button" data-return="trips">
+                        <i data-lucide="arrow-left" class="back-icon"></i>
+                    </button>
+                    <h1 id="tripFormTitle">Create Your Trip</h1>
+                </div>
+                
+                <div class="form-container">
+                    <form id="tripForm">
+                        <!-- Budget -->
+                        <div class="form-section">
+                            <h2>What's your budget?</h2>
+                            <div class="options-grid options-grid-3">
+                                <div class="option-card" data-value="Low Budget">
+                                    <i data-lucide="coins" class="option-icon"></i>
+                                    <h3>Low Budget</h3>
+                                </div>
+                                
+                                <div class="option-card" data-value="Mid Budget">
+                                    <i data-lucide="wallet" class="option-icon"></i>
+                                    <h3>Mid Budget</h3>
+                                </div>
+                                
+                                <div class="option-card" data-value="High Budget">
+                                    <i data-lucide="diamond" class="option-icon"></i>
+                                    <h3>High Budget</h3>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Travel Type -->
+                        <div class="form-section">
+                            <h2>Who are you traveling with?</h2>
+                            <div class="options-grid options-grid-3">
+                                <div class="option-card" data-value="Solo">
+                                    <i data-lucide="user" class="option-icon"></i>
+                                    <h3>Solo</h3>
+                                </div>
+                                
+                                <div class="option-card" data-value="Couple">
+                                    <i data-lucide="users" class="option-icon"></i>
+                                    <h3>Couple</h3>
+                                </div>
+                                
+                                <div class="option-card" data-value="Family">
+                                    <i data-lucide="users" class="option-icon"></i>
+                                    <h3>Family</h3>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Region -->
+                        <div class="form-section">
+                            <h2>Preferred region</h2>
+                            <div class="options-grid options-grid-2">
+                                <div class="option-card" data-value="Europe">
+                                    <i data-lucide="globe" class="option-icon"></i>
+                                    <h3>Europe</h3>
+                                </div>
+                                
+                                <div class="option-card" data-value="Asia">
+                                    <i data-lucide="globe" class="option-icon"></i>
+                                    <h3>Asia</h3>
+                                </div>
+                                
+                                <div class="option-card" data-value="Americas">
+                                    <i data-lucide="globe" class="option-icon"></i>
+                                    <h3>Americas</h3>
+                                </div>
+                                
+                                <div class="option-card" data-value="Africa">
+                                    <i data-lucide="globe" class="option-icon"></i>
+                                    <h3>Africa</h3>
+                                </div>
+                                
+                                <div class="option-card" data-value="Middle East">
+                                    <i data-lucide="globe" class="option-icon"></i>
+                                    <h3>Middle East</h3>
+                                </div>
+                                
+                                <div class="option-card" data-value="Oceania">
+                                    <i data-lucide="globe" class="option-icon"></i>
+                                    <h3>Oceania</h3>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Interests -->
+                        <div class="form-section">
+                            <h2>What are you interested in? <span class="note">(select at least 2)</span></h2>
+                            <div class="options-grid options-grid-2 multi-select">
+                                <div class="option-card interest-option" data-value="Nature">
+                                    <i data-lucide="leaf" class="option-icon"></i>
+                                    <h3>Nature</h3>
+                                </div>
+                                
+                                <div class="option-card interest-option" data-value="Cultural">
+                                    <i data-lucide="landmark" class="option-icon"></i>
+                                    <h3>Cultural</h3>
+                                </div>
+                                
+                                <div class="option-card interest-option" data-value="Food">
+                                    <i data-lucide="utensils" class="option-icon"></i>
+                                    <h3>Food</h3>
+                                </div>
+                                
+                                <div class="option-card interest-option" data-value="Adventure">
+                                    <i data-lucide="compass" class="option-icon"></i>
+                                    <h3>Adventure</h3>
+                                </div>
+                                
+                                <div class="option-card interest-option" data-value="Beach">
+                                    <i data-lucide="sun" class="option-icon"></i>
+                                    <h3>Beach</h3>
+                                </div>
+                                
+                                <div class="option-card interest-option" data-value="Shopping">
+                                    <i data-lucide="shopping-bag" class="option-icon"></i>
+                                    <h3>Shopping</h3>
+                                </div>
+                                
+                                <div class="option-card interest-option" data-value="Nightlife">
+                                    <i data-lucide="moon" class="option-icon"></i>
+                                    <h3>Nightlife</h3>
+                                </div>
+                                
+                                <div class="option-card interest-option" data-value="Wellness">
+                                    <i data-lucide="heart-pulse" class="option-icon"></i>
+                                    <h3>Wellness</h3>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary" id="submitTripForm">
+                                <i data-lucide="check" class="btn-icon"></i>
+                                <span id="submitButtonText">Find Destination</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Trip Result Page -->
+            <div id="tripResultPage" class="page">
+                <div class="page-header">
+                    <button class="back-button" data-return="trips">
+                        <i data-lucide="arrow-left" class="back-icon"></i>
+                    </button>
+                    <h1>Your Perfect Destination</h1>
+                </div>
+                
+                <div class="trip-result-container">
+                    <!-- Trip Image or Surprise Cover -->
+                    <div id="tripImageContainer" class="trip-image-container">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                    
+                    <!-- Trip Details -->
+                    <div id="tripDetails" class="trip-details">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Profile Page -->
+            <div id="profilePage" class="page">
+                <div class="page-header">
+                    <h1>Your Profile</h1>
+                </div>
+                
+                <div id="profileDisplay" class="profile-container">
+                    <div class="profile-header">
+                        <div id="profileAvatar" class="profile-avatar">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                        <div class="profile-info">
+                            <h2 id="profileName">User Name</h2>
+                            <p id="profileEmail">user@example.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-content">
+                        <div class="account-info">
+                            <h3>Account Information</h3>
+                            
+                            <div class="info-item">
+                                <span class="info-label">Name</span>
+                                <span id="infoName">User Name</span>
+                            </div>
+                            
+                            <div class="info-item">
+                                <span class="info-label">Email</span>
+                                <span id="infoEmail">user@example.com</span>
+                            </div>
+                            
+                            <div class="info-item">
+                                <span class="info-label">Trips</span>
+                                <span id="infoTrips">0</span>
+                            </div>
+                        </div>
+                        
+                        <div class="profile-actions">
+                            <button id="editProfileBtn" class="btn btn-outline">
+                                <i data-lucide="edit" class="btn-icon"></i>
+                                Edit Profile
+                            </button>
+                            
+                            <button id="logoutBtn" class="btn btn-outline btn-danger">
+                                <i data-lucide="log-out" class="btn-icon"></i>
+                                Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="profileForm" class="profile-container" style="display: none;">
+                    <h2>Edit Profile</h2>
+                    
+                    <form id="editProfileForm">
+                        <div class="form-group">
+                            <label for="editName">Full Name</label>
+                            <input type="text" id="editName" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="editEmail">Email</label>
+                            <input type="email" id="editEmail" required>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" id="cancelEditBtn" class="btn btn-outline">
+                                Cancel
+                            </button>
+                            
+                            <button type="submit" class="btn btn-primary">
+                                Save Changes
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </section>
+    
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    
+    <!-- PWA Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./service-worker.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                    })
+                    .catch(error => {
+                        console.log('ServiceWorker registration failed: ', error);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
